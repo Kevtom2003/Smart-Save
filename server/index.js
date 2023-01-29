@@ -5,12 +5,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import userDataRoutes from "./routes/userData.js";
-import analyticsRoutes from "./routes/analytics.js";
-import generalRoutes from "./routes/general.js";
+
+
+import expenseRoutes from "./routes/userData.js";
+
 
 // data imports
-
+import Expense from "./models/transactionData.js";
 import {
   transactionData
 } from "./data/index.js";
@@ -27,8 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 /* ROUTES */
-app.use("/userData", userDataRoutes);
-app.use("/analytics", analyticsRoutes);
+app.use("/expenses", expenseRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
@@ -42,11 +42,7 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     /* ONLY ADD DATA ONE TIME */
-    // AffiliateStat.insertMany(dataAffiliateStat);
-    // OverallStat.insertMany(dataOverallStat);
-    // Product.insertMany(dataProduct);
-    // ProductStat.insertMany(dataProductStat);
-    // Transaction.insertMany(dataTransaction);
-    // User.insertMany(dataUser);
+    //Expense.insertMany(transactionData);
+
   })
   .catch((error) => console.log(`${error} did not connect`));
